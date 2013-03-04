@@ -1,88 +1,66 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Backbone.js Web App</title>
-      <!--  <link rel="stylesheet" href="css/screen.css" />-->
-		
-	<style type="text/css">
-	
-.book-container { width:300px; height:130px; padding:10px; border:1px solid #aaa; margin:0 10px 10px 0; position:relative; float:left; font-family:sans-serif; color:#333; background-color:#eee; }
-.book-container button { margin-top:10px; float:right; }
-header { margin-bottom:10px; }
-header:after { content:""; display:block; height:0; visibility:hidden; clear:both; font-size:0; line-height:0; }
-#set { float:right; }
-#showForm { float:left; }
-#addBook { display:none; width:1000px; float:left; clear:both; font-family:sans-serif; font-size:14px; }
-</style>
-
-    </head>
-    <body>
-        <div id="books">
-            <header >
- <button type="submit" class="addition">Add Book</button>  
-
-               <div id="set"><label>Search: </label><input type="text" class="search" placeholder="Book Name">
-			   </div>
-    
-                <form id="addBook" action="#" >
-                   <table>
-<tr>
-<td>
- <label>BookName:</label>
-</td>
-<td>
-<input id="name" placeholder="Enter Book Name" />
-</td>
-</tr>
-<tr>
-<td>
-                    <label>AuthorName:</label>
-</td>
-<td>
-<input id="author" placeholder="Enter Author Name" />
-</td>
-</tr>
-<tr>    
-     <td>           <label for="status">Status:</label>
-</td>
-<td>
-<select id="select">
-  <option value="Read">Read</option>
-  <option value="Unread">Unread</option>
- </select>
-<td>
-
-            <td>        <button id="add" >Add</button></td></tr>
+<head>
+	<meta charset="UTF-8" />
+        <title>Shelfari</title>
+	<link rel="stylesheet" href="stylesheet/styles.css" />
+</head>
+<body>
+	<div id="header-wrap">
+	        <div id="books">
+			<header class="group">
+				<div id="title"><h2 class="green"> Shelfari</h2></div>
+				<nav class="group">
+					<ul>	
+						<li class="addBook"><button type="submit" class="addition"><div id="addText" style="font-size: 15px; color: #fff; text-align:centre;">Add Book</div></button></li>
+						<li class="search"><input type="text" placeholder="Book Name" class="search"/></li>
+					</ul>
+				</nav>
+			<form id="addBook" action="#" >
+			<table>
+				<tr><td><label>Book Name:</label></td><td><input type="text" placeholder="Enter Book Name" id="name" /></td></tr>
+				<tr><td><label>Author Name:</label></td><td><input type="text" id="author" placeholder="Enter Author Name" /></td></tr>
+				<tr><td><label for="status">Status:</label></td>
+				<td>
+					<select id="select">
+	  				<option value="Read">Read</option>
+	  				<option value="Unread">Unread</option>
+					</select>
+				</td>
+				<td><button id="add" >Add</button></td></tr>
+			</table>
+			
+			</form>
+			
+		</div>
+		<div id="book-wrap"></div>
+	</div>
+<script id="bookTemplate" type="text/template">
+<table>
+	<tr><td height="25"><b>Book Name:</b></td><td><%= name %></td></tr>
+	<tr><td height="25"><b>Author Name:</b></td><td><%= author %></td></tr>
+	<tr><td height="25"><b>Status:</b></td><td><%= status %></td></tr>
+	<tr><td><button class="edit">Edit</button></td><td><button class="delete">Delete</button></td></tr>
 </table>
-                </form>
-            </header>
-        </div>
-        <script id="bookTemplate" type="text/template">
-      		<table>
-			<tr><td height="25"><b>Book Name:</b></td><td><%= name %></td></tr>
-			<tr><td height="25"><b>Author Name:</b></td><td><%= author %></td></tr>
-			<tr><td height="25"><b>Status:</b></td><td><%= status %></td></tr>
-			<tr><td><button class="edit">Edit</button></td><td><button class="delete">Delete</button></td></tr>
-			</table>
-        </script>
-        <script id="bookEditTemplate" type="text/template">
-            <form id="editBook" action="#">
-            <table>
-			<tr><td><b>Book Name:</b></td><td><input id="name" value="<%= name %>" /></td></tr>
-			<tr><td><b>Author Name:</b></td><td><input id="author" value="<%= author %>" /></td></tr>
-			<tr><td><b>Status:</b></td><td><select id="editSelect">
-  				<option value="Read">Read</option>
-  				<option value="Unread">Unread</option>
- 				</select></td></tr>
-			<tr><td><button class="save">Save</button></td><td><button class="cancel">Cancel</button></td></tr>
-			</table>
-            </form>
-        </script>
-		<script src="js/jquery-1.7.1.min.js"></script>
-        <script src="js/underscore-min.js"></script>
-        <script src="js/backbone-min.js"></script>
-        <script src="js/app.js"></script>
-    </body>
+</script>
+<script id="bookEditTemplate" type="text/template">
+<form id="editBook" action="#">
+	<table>
+		<tr><td><b>Book Name:</b></td><td><input id="name" type="text" value="<%= name %>"/></td></tr>
+		<tr><td><b>Author Name:</b></td><td><input id="author" type="text" value="<%= author %>" /></td></tr>
+		<tr><td><b>Status:</b></td><td>
+			<select id="editSelect">
+			<option value="Read">Read</option>
+			<option value="Unread">Unread</option>
+			</select></td></tr>
+		<tr><td><button class="save">Save</button></td><td><button class="cancel">Cancel</button></td></tr>
+	</table>
+</form>
+</script>
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/backbone-min.js"></script>
+<script src="js/app.js"></script>
+</body>
 </html>
